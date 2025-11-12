@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HPsystem : MonoBehaviour
+public class HpSystem : MonoBehaviour
 {
     [SerializeField] private float maxHP;
-    private float currentHP;
+    public float currentHP { get; private set; }
+    private bool isDead;
 
     private void Awake()
     {
         currentHP = maxHP;
+        isDead = false;
     }
+
     public void TakeDamage(float _damage)
     {
+        if (isDead) return;
+
         currentHP = Mathf.Clamp(currentHP - _damage, 0, maxHP);
 
         if (currentHP > 0)
@@ -22,7 +27,24 @@ public class HPsystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("Entity Died");
+            isDead = true;
+            Die();
         }
     }
+
+    private void Die()
+    {
+        Debug.Log("Entity Died");
+        gameObject.SetActive(false);
+    }
+
+[SerializeField] private KeyCode damageKey = KeyCode.E;
+
+private void Update()
+{
+    if (Input.GetKeyDown(damageKey))
+    {
+        TakeDamage(1);
+    }
+}
 }
