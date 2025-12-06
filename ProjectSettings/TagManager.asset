@@ -3,18 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Player1
+  - Door
+  - Player2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - Ground
-  - Player1
-  - Player2
-  - spikeTrap
+  - Player
+  - Mechanic Object
+  - Enemy
+  - 
   - 
   - 
   - 
